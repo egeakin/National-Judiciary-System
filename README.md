@@ -2,7 +2,7 @@
 
 You can use the [editor on GitHub](https://github.com/egeakin/Database/edit/master/README.md) to maintain and preview the content for your website in Markdown files.  
 
-This is Project Proposal [Project Proposal](https://github.com/egeakin/Database/edit/master/README.md).
+This is Project Proposal [Project Proposal](https://github.com/egeakin/National-Judiciary-System/blob/master/CS353%20proposal.pdf).
 We are group 24.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
