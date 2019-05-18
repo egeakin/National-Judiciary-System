@@ -37,23 +37,23 @@ public class Main {
 
             //2.2
             String judge = "CREATE TABLE judge( " +
-                    "TCK_no varchar(11) NOT NULL, " +
+                    "TCK_NO varchar(11) NOT NULL, " +
                     "law_society_ID varchar(11) NOT NULL PRIMARY KEY, " +
-                    "type varchar(30) NOT NULL, " +
-                    "FOREIGN KEY (TCK_no) REFERENCES citizen(TCK_no))";
+                    "type varchar(30) , " +
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO))";
 
             //2.3
             String conciliator = "CREATE TABLE conciliator " +
-                    "(TCK_no VARCHAR(11) NOT NULL," +
+                    "(TCK_NO VARCHAR(11) NOT NULL," +
                     "law_society_ID VARCHAR(11) NOT NULL PRIMARY KEY," +
-                    "FOREIGN KEY (TCK_no) REFERENCES citizen(TCK_no))";
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO))";
 
             //2.4
             String lawyer = "CREATE TABLE lawyer " +
-                    "(TCK_no VARCHAR(11) NOT NULL," +
+                    "(TCK_NO VARCHAR(11) NOT NULL," +
                     "law_society_ID VARCHAR(11) NOT NULL PRIMARY KEY," +
                     "type VARCHAR(30) NOT NULL," +
-                    "FOREIGN KEY (TCK_no) REFERENCES citizen(TCK_no))";
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO))";
 
             //2.5
             String lawsuit = "CREATE TABLE lawsuit " +
@@ -64,23 +64,23 @@ public class Main {
                     "pending_place VARCHAR(100))";
 
             //2.6
-            String court = "CREATE TABLE court(" +
+            String court = "CREATE TABLE court " +
+                    "(court_id int NOT NULL PRIMARY KEY AUTO_INCREMENT ," +
                     "name varchar (100) NOT NULL," +
                     "city varchar (20) NOT NULL," +
                     "type varchar (30)," +
-                    "category varchar (30)," +
-                    "PRIMARY KEY (name, city) );";
+                    "category varchar (30));";
 
             //2.7
             String gets_penalty = "CREATE TABLE gets_penalty" +
                     "(lawsuit_ID int," +
-                    "suspect_TCK_no VARCHAR(11)," +
+                    "suspect_TCK_NO VARCHAR(11)," +
                     "penalty_type VARCHAR(10) NOT NULL," +
                     "year int," +
                     "fine int," +
-                    "PRIMARY KEY(lawsuit_ID, suspect_TCK_no)," +
+                    "PRIMARY KEY(lawsuit_ID, suspect_TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit(lawsuit_ID)," +
-                    "FOREIGN KEY (suspect_TCK_no) REFERENCES citizen(TCK_no));";
+                    "FOREIGN KEY (suspect_TCK_NO) REFERENCES citizen(TCK_NO));";
 
             //2.8
             String manage = "CREATE TABLE manage(" +
@@ -92,10 +92,10 @@ public class Main {
 
             //2.9
             String has_lawyer = "CREATE TABLE has_lawyer " +
-                    "(TCK_no VARCHAR(11) NOT NULL," +
+                    "(TCK_NO VARCHAR(11) NOT NULL," +
                     "law_society_ID VARCHAR(11) NOT NULL," +
-                    "PRIMARY KEY (TCK_no,law_society_ID)," +
-                    "FOREIGN KEY (TCK_no) REFERENCES citizen(TCK_no)," +
+                    "PRIMARY KEY (TCK_NO,law_society_ID)," +
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO)," +
                     "FOREIGN KEY (law_society_ID) REFERENCES lawyer(law_society_ID))";
 
             //2.10
@@ -110,9 +110,11 @@ public class Main {
             String involves = "CREATE TABLE involves (" +
                     "TCK_NO varchar(11) NOT NULL," +
                     "lawsuit_ID int NOT NULL," +
-                    "role varchar (10), " +
-                    "PRIMARY KEY (TCK_no,lawsuit_ID)," +
-                    "FOREIGN KEY (TCK_no) REFERENCES citizen (TCK_no)," +
+                    "role varchar (50), " +
+                    "result varchar (10), " +
+                    "penalty varchar (10), " +
+                    "PRIMARY KEY (TCK_NO,lawsuit_ID)," +
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen (TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit (lawsuit_ID));";
             //2.12
             String open = "CREATE TABLE open (" +
@@ -124,22 +126,20 @@ public class Main {
 
             //2.13
             String works = "CREATE TABLE works (" +
-                    "court_name varchar (100) NOT NULL," +
-                    "court_city varchar (20) NOT NULL," +
+                    "court_id int NOT NULL," +
                     "law_society_ID varchar (11) NOT NULL," +
-                    "PRIMARY KEY (court_name,court_city,law_society_ID)," +
+                    "PRIMARY KEY (court_id,law_society_ID)," +
                     "FOREIGN KEY (law_society_ID) REFERENCES judge (law_society_ID)," +
-                    "FOREIGN KEY (court_name,court_city) REFERENCES court (name,city));";
+                    "FOREIGN KEY (court_id) REFERENCES court (court_id));";
 
             //2.14
             String pending_place = "CREATE TABLE pending_place (" +
                     "lawsuit_ID int NOT NULL," +
-                    "name varchar (20) NOT NULL," +
-                    "city varchar(50) NOT NULL," +
+                    "court_id int NOT NULL," +
                     "date date ," +
                     "PRIMARY KEY (lawsuit_ID)," +
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit(lawsuit_ID)," +
-                    "FOREIGN KEY (name, city) REFERENCES court(name, city));";
+                    "FOREIGN KEY (court_id) REFERENCES court(court_id));";
             //2.15
             String trial = "CREATE TABLE trial (" +
                     "lawsuit_ID int NOT NULL," +
@@ -150,12 +150,12 @@ public class Main {
 
             //2.16
             String has_statement = "CREATE TABLE has_statement(" +
-                    "TCK_no varchar (11) NOT NULL," +
+                    "TCK_NO varchar (11) NOT NULL," +
                     "lawsuit_ID int NOT NULL," +
                     "trial_date date, " +
                     "personal_statement varchar(100),"+
                     "PRIMARY KEY (lawsuit_ID,trial_date)," +
-                    "FOREIGN KEY (TCK_no) REFERENCES citizen(TCK_no)," +
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID,trial_date) REFERENCES trial(lawsuit_ID,trial_date));";
             //2.17
             String designate = "CREATE TABLE designate(" +
@@ -168,11 +168,11 @@ public class Main {
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit(lawsuit_ID));";
             //2.18
             String citizen_reconciliate = "CREATE TABLE citizen_reconciliate(" +
-                    "citizen_TCK_no varchar (11) NOT NULL," +
+                    "citizen_TCK_NO varchar (11) NOT NULL," +
                     "lawsuit_ID int NOT NULL," +
                     "Citizen_decision varchar (5)," +
-                    "PRIMARY KEY (lawsuit_ID,citizen_TCK_no)," +
-                    "FOREIGN KEY (citizen_TCK_no) REFERENCES citizen (TCK_no)," +
+                    "PRIMARY KEY (lawsuit_ID,citizen_TCK_NO)," +
+                    "FOREIGN KEY (citizen_TCK_NO) REFERENCES citizen (TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit (lawsuit_ID));";
 
 
@@ -260,19 +260,19 @@ public class Main {
 
             //2.2
             st.execute("INSERT INTO judge VALUES " +
-                            "('36145544574' , '0001' , 'Yargi' );" );
+                            "('36145544574' , 'J1' , 'Yargi' );" );
 
             System.out.println("judge Inserted");
 
             //2.3
             st.execute("INSERT INTO conciliator VALUES " +
-                    "('10312178565' , '21602166');");
+                    "('10312178565' , 'C1');");
 
             System.out.println("conciliator Inserted");
 
             //2.4
             st.execute("INSERT INTO lawyer VALUES " +
-                    "('36145544575' , '0001','savunmaci');");
+                    "('36145544575' , 'L1','savunmaci');");
 
             System.out.println("lawyer Inserted");
 
@@ -282,12 +282,17 @@ public class Main {
             System.out.println("Alter");
 
             st.execute("INSERT INTO lawsuit (category, public_access ,pending_place) VALUES" +
-                    "('aile davasi','public_accesible' , 'Ankara'); ");
+                    "('aile davasi','public_accesible' , 'Ankara Adalet Sarayi')," +
+                    "('hirsizlik','public_accesible' , 'Istanbul'); ");
 
             System.out.println("lawsuit Inserted");
 
             //2.6
-            st.execute("INSERT INTO court VALUES " +
+            st.execute("ALTER TABLE court AUTO_INCREMENT = 1;");
+
+            System.out.println("Alter");
+
+            st.execute("INSERT INTO court (name,city,type,category) VALUES " +
                     "('Ankara Adalet Sarayi' , 'Ankara','ceza', 'adalet');");
 
 
@@ -301,42 +306,43 @@ public class Main {
 
             //2.8
             st.execute("INSERT INTO manage VALUES " +
-                    "('0001' , '1');");
+                    "('J1' , '1');");
 
             System.out.println("manage Inserted");
 
             //2.9
             st.execute("INSERT INTO has_lawyer VALUES " +
-                    "(10312178564,'0001');");
+                    "(10312178564,'L1');");
 
             System.out.println("has_lawyer Inserted");
 
             //2.10
             st.execute("INSERT INTO reconciliate VALUES " +
-                    "(21602166, '1', 'abi barisin artik' ); ");
+                    "('C1', '1', 'abi barisin artik' ); ");
             System.out.println("reconciliate Inserted");
 
             //2.11
             st.execute("INSERT INTO involves VALUES " +
-                    "(36145544574,'1','victim');");
+                    "(36145544574,'1','victim','','')," +
+                    "(36145544575,'2','victim','','');");
 
             System.out.println("involves Inserted");
 
             //2.12
             st.execute("INSERT INTO open VALUES " +
-                    "('0001','1');");
+                    "('L1','1');");
 
             System.out.println("open Inserted");
 
             //2.13
             st.execute("INSERT INTO works VALUES " +
-                    "('Ankara Adalet Sarayi','Ankara','0001');");
+                    "('1','J1');");
 
             System.out.println("works Inserted");
 
             //2.14
             st.execute("INSERT INTO pending_place VALUES " +
-                    "('1','Ankara Adalet Sarayi','Ankara','1998-10-15');");
+                    "('1','1','1998-10-15');");
 
             System.out.println("pending_place Inserted");
 
@@ -355,7 +361,7 @@ public class Main {
 
             //2.17
             st.execute("INSERT INTO designate VALUES " +
-                    "('0001','21602166','1');");
+                    "('J1','C1','1');");
 
             System.out.println("designate Inserted");
             //2.18
@@ -466,12 +472,12 @@ public class Main {
             System.out.println("7");
 
             ResultSet resultSet7 = st.executeQuery("SELECT * FROM gets_penalty");
-            System.out.println("lawsuit_ID \t\t\t suspect_TCK_no \t penalty_type \t year \t fine");
+            System.out.println("lawsuit_ID \t\t\t suspect_TCK_NO \t penalty_type \t year \t fine");
 
             while(resultSet7.next() ) {
                 System.out.println(
                         resultSet7.getString("lawsuit_ID") + " \t " +
-                                resultSet7.getString("suspect_TCK_no") + " \t " +
+                                resultSet7.getString("suspect_TCK_NO") + " \t " +
                                 resultSet7.getString("penalty_type") + " \t "+
                                 resultSet7.getString("year") + " \t "+
                                 resultSet7.getString("fine") );
@@ -493,11 +499,11 @@ public class Main {
 
             ResultSet resultSet9 = st.executeQuery("SELECT * FROM has_lawyer");
 
-            System.out.println("TCK_no \t\t\t law_society_ID ");
+            System.out.println("TCK_NO \t\t\t law_society_ID ");
 
             while(resultSet9.next() ) {
                 System.out.println(
-                        resultSet9.getString("TCK_no") + " \t " +
+                        resultSet9.getString("TCK_NO") + " \t " +
                         resultSet9.getString("law_society_ID") );
 
             }
@@ -517,11 +523,11 @@ public class Main {
 
             ResultSet resultSet11 = st.executeQuery("SELECT * FROM involves");
 
-            System.out.println("TCK_no \t\t\t lawsuit_ID  \t role");
+            System.out.println("TCK_NO \t\t\t lawsuit_ID  \t role");
 
             while(resultSet11.next() ) {
                 System.out.println(
-                    resultSet11.getString("TCK_no") + " \t " +
+                    resultSet11.getString("TCK_NO") + " \t " +
                     resultSet11.getString("lawsuit_ID") + " \t " +
                     resultSet11.getString("role"));
             }
@@ -542,12 +548,11 @@ public class Main {
 
             ResultSet resultSet13 = st.executeQuery("SELECT * FROM works");
 
-            System.out.println("court_name \t\t\t court_city \t law_society_ID  ");
+            System.out.println("court_id  \t law_society_ID  ");
 
             while(resultSet13.next() ) {
                 System.out.println(
-                        resultSet13.getString("court_name") + " \t " +
-                                resultSet13.getString("court_city") + " \t " +
+                        resultSet13.getString("court_id") + " \t " +
                                 resultSet13.getString("law_society_ID"));
             }
 
@@ -555,13 +560,12 @@ public class Main {
 
             ResultSet resultSet14 = st.executeQuery("SELECT * FROM pending_place");
 
-            System.out.println("lawsuit_ID \t name \t\t\t court_city \t law_society_ID  ");
+            System.out.println("lawsuit_ID \t  court_id \t law_society_ID  ");
 
             while(resultSet14.next() ) {
                 System.out.println(
                         resultSet14.getString("lawsuit_ID") + " \t " +
-                                resultSet14.getString("name") + " \t " +
-                                resultSet14.getString("city") + " \t " +
+                                resultSet14.getString("court_id") + " \t " +
                                 resultSet14.getString("date"));
             }
 
@@ -583,11 +587,11 @@ public class Main {
 
             ResultSet resultSet16 = st.executeQuery("SELECT * FROM has_statement");
 
-            System.out.println("TCK_no \t lawsuit_ID  \t trial_date \t personal_statement ");
+            System.out.println("TCK_NO \t lawsuit_ID  \t trial_date \t personal_statement ");
 
             while(resultSet16.next() ) {
                 System.out.println(
-                        resultSet16.getString("TCK_no") + " \t " +
+                        resultSet16.getString("TCK_NO") + " \t " +
                                 resultSet16.getString("lawsuit_ID") + " \t " +
                                 resultSet16.getString("trial_date") + " \t " +
                                 resultSet16.getString("personal_statement"));
@@ -611,11 +615,11 @@ public class Main {
 
             ResultSet resultSet18 = st.executeQuery("SELECT * FROM citizen_reconciliate");
 
-            System.out.println("citizen_TCK_no  \t lawsuit_ID \t Citizen_decision ");
+            System.out.println("citizen_TCK_NO  \t lawsuit_ID \t Citizen_decision ");
 
             while(resultSet18.next() ) {
                 System.out.println(
-                        resultSet18.getString("citizen_TCK_no") + " \t " +
+                        resultSet18.getString("citizen_TCK_NO") + " \t " +
                                 resultSet18.getString("lawsuit_ID") + " \t " +
                                 resultSet18.getString("Citizen_decision"));
             }
