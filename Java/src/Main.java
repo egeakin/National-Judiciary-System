@@ -73,13 +73,13 @@ public class Main {
             //2.7
             String gets_penalty = "CREATE TABLE gets_penalty" +
                     "(lawsuit_ID int," +
-                    "suspect_TCK_NO VARCHAR(11)," +
-                    "penalty_type VARCHAR(10) NOT NULL," +
+                    "TCK_NO VARCHAR(11)," +
+                    "penalty_type VARCHAR(10)," +
                     "year int," +
                     "fine int," +
-                    "PRIMARY KEY(lawsuit_ID, suspect_TCK_NO)," +
+                    "PRIMARY KEY(lawsuit_ID, TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit(lawsuit_ID)," +
-                    "FOREIGN KEY (suspect_TCK_NO) REFERENCES citizen(TCK_NO));";
+                    "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO));";
 
             //2.8
             String manage = "CREATE TABLE manage(" +
@@ -112,7 +112,6 @@ public class Main {
                     "lawsuit_ID int NOT NULL," +
                     "role varchar (50), " +
                     "result varchar (10), " +
-                    "penalty varchar (10), " +
                     "PRIMARY KEY (TCK_NO,lawsuit_ID)," +
                     "FOREIGN KEY (TCK_NO) REFERENCES citizen (TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID) REFERENCES lawsuit (lawsuit_ID));";
@@ -154,7 +153,7 @@ public class Main {
                     "lawsuit_ID int NOT NULL," +
                     "trial_date date, " +
                     "personal_statement varchar(50),"+
-                    "PRIMARY KEY (lawsuit_ID,trial_date)," +
+                    "PRIMARY KEY (TCK_NO,lawsuit_ID,trial_date)," +
                     "FOREIGN KEY (TCK_NO) REFERENCES citizen(TCK_NO)," +
                     "FOREIGN KEY (lawsuit_ID,trial_date) REFERENCES trial(lawsuit_ID,trial_date));";
             //2.17
@@ -248,6 +247,7 @@ public class Main {
             st.execute(citizen_reconciliate);
             System.out.println("citizen_reconciliate Created");
 
+
             //2.1
             st.execute("INSERT INTO citizen VALUES " +
                     "('10312178564' , 'Ege' , 'Akin' , '12345', '05069252527', 'ege.akin@ug.bilkent.edu.tr', '2011-01-01', '21', '31', 'Cukurambar', '69', 'Ankara', 'Turkiye', 60000  )," +
@@ -324,8 +324,8 @@ public class Main {
 
             //2.11
             st.execute("INSERT INTO involves VALUES " +
-                    "(36145544574,'1','victim','','')," +
-                    "(36145544575,'2','victim','','');");
+                    "(36145544574,'1','victim','')," +
+                    "(36145544575,'2','victim','');");
 
             System.out.println("involves Inserted");
 
@@ -472,12 +472,12 @@ public class Main {
             System.out.println("7");
 
             ResultSet resultSet7 = st.executeQuery("SELECT * FROM gets_penalty");
-            System.out.println("lawsuit_ID \t\t\t suspect_TCK_NO \t penalty_type \t year \t fine");
+            System.out.println("lawsuit_ID \t\t\t TCK_NO \t penalty_type \t year \t fine");
 
             while(resultSet7.next() ) {
                 System.out.println(
                         resultSet7.getString("lawsuit_ID") + " \t " +
-                                resultSet7.getString("suspect_TCK_NO") + " \t " +
+                                resultSet7.getString("TCK_NO") + " \t " +
                                 resultSet7.getString("penalty_type") + " \t "+
                                 resultSet7.getString("year") + " \t "+
                                 resultSet7.getString("fine") );
