@@ -4,16 +4,21 @@ Lawyer Page
 
 ![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.20.48.png)
 
-This is our project [National judiciary System](http://dijkstra.ug.bcc.bilkent.edu.tr/~burak.korkmaz/DatabaseProje/JudicaryDatabase/login.php).
-
 Judge Page
 
 ![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.25.58.png)
 
 Subpages
-![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.31.33.png)
+
+![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.31.40.png)
+
+![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.32.01.png)
+
+![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.32.17.png)
 
 We are group 24.
+
+This is our project [National judiciary System](http://dijkstra.ug.bcc.bilkent.edu.tr/~burak.korkmaz/DatabaseProje/JudicaryDatabase/login.php).
 
 This page is for reports of CS 353 Project
 
