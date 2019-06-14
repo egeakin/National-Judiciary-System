@@ -10,6 +10,9 @@ Judge Page
 
 ![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.25.58.png)
 
+Subpages
+![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.31.33.png)
+
 We are group 24.
 
 This page is for reports of CS 353 Project
