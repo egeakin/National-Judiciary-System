@@ -1,5 +1,8 @@
 ## WELCOME
 
+Lawyer Page
+![alt text](https://github.com/egeakin/National-Judiciary-System/blob/master/Screen%20Shot%202019-06-14%20at%2015.20.48.png)
+
 This is our project [National judiciary System](http://dijkstra.ug.bcc.bilkent.edu.tr/~burak.korkmaz/DatabaseProje/JudicaryDatabase/login.php).
 
 We are group 24.
